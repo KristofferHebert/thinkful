@@ -2,9 +2,10 @@
     "name": "meal_calculator",
     "version": "1.0.0",
     "description": "A meal cost calculator",
-    "main": "node meal_calculator.js",
+    "main": "meal_calculator.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node meal_calculator.js"
     },
     "keywords": "meal, calculator, food",
     "author": "Kristoffer Hebert",
