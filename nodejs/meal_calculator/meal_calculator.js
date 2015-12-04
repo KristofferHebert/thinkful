@@ -43,18 +43,21 @@ function mealCalculator(dinersArray, tax, tip) {
 		var grandTotal = 0
 
 		while (++index < length) {
-			var dinnerMealTotal = Number(dinersArray[0].total * (tax + 1))
+			var dinnerMealTotal = dinersArray[index].total * (tax + 1)
             grandTotal+= dinnerMealTotal
 			console.log('Total bill for', dinersArray[index].name, '$' + prettyDollarAmount(dinnerMealTotal))
 		}
 
-		return prettyDollarAmount(grandTotal)
+		console.log('=================================')
+		var tipPerPerson = ((grandTotal * (tip + 1)) - grandTotal) / length 
+		grandTotal = grandTotal * (tip + 1)
+		console.log('Grand Total:', '$' + prettyDollarAmount(grandTotal), "with $" + prettyDollarAmount(tipPerPerson), "tip per person")
 
 }
 
 
 var diner = Diner('Jeff', [15, 16, 17.50])
-var diner1 = Diner('Sue', [15, 16, 17.50])
+var diner1 = Diner('Sue', [12, 17, 17.50])
 var diner2 = Diner('Marie', [15, 16, 17.50])
 var dinersArray = [diner, diner1, diner2]
 console.log('Calulating total', diner.total, diner.total === 48.5);
@@ -67,4 +70,4 @@ diner.addDish(1)
 console.log('Calulating total with new dishes', diner.total, diner.total === 60.5);
 
 console.log('=================================')
-console.log('Grand Total:', '$' + mealCalculator(dinersArray, 0.10, 0.15))
+mealCalculator(dinersArray, 0.10, 0.15)
