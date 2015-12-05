@@ -1,0 +1,23 @@
+{
+    "name": "mongo-shopping-list",
+    "version": "1.0.0",
+    "description": "",
+    "main": "public/server.js",
+    "scripts": {
+        "start": "nodemon server.js",
+        "test": "mocha"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "chai": "^3.4.1",
+        "chai-http": "^1.0.0",
+        "mocha": "^2.3.4",
+        "nodemon": "^1.8.1"
+    },
+    "dependencies": {
+        "body-parser": "^1.14.1",
+        "express": "^4.13.3",
+        "mongoose": "^4.2.9"
+    }
+}
