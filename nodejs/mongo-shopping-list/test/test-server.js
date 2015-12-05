@@ -7,9 +7,9 @@ var app = server.app
 
 var Item = require('../models/items')
 var seed = require('../db/seed')
+var ID = ''
 
-
-var should = chai.should()
+var expect = chai.expect
 
 chai.use(chaiHttp)
 
@@ -19,41 +19,58 @@ describe('Shopping List', function() {
 			done()
 		})
 	})
-	it('It should get items', function() {
+	it('It should get items', function(done) {
         chai.request(app)
-            .get('/itemsz')
-            .then(function(res){
-                    console.log(res.status);
-                    should(err).equal(null);
-    				should(res.status).equal(500);
+            .get('/items')
+            .end(function(err, res){
+                expect(res).to.have.status(200)
+                done()
             })
-            .catch(function (err) {
-                throw err;
-            })
+
 	})
-	it('It should create item', function() {
+	it('It should create item', function(done) {
         chai.request(app)
             .post('/items')
             .send({
                 name: "Potato"
             })
-            .then(function(res){
-                    should(err).to.be.null;
-    				should(res).to.have.status(400);
+            .end(function(err, res){
+                ID = res.body._id
+                expect(res.body.name).equal('Potato')
+                expect(res.body).to.have.property('name')
+    			expect(res).to.have.status(200);
+                done()
             })
-            .catch(function (err) {
-                throw err;
-            })
-	})
-	it('It should update items', function() {
-	})
-	it('It should destroy items', function() {
 
 	})
+	it('It should update items', function(done) {
+        chai.request(app)
+            .put('/items/' + ID)
+            .send({
+                name: "Super Potato"
+            })
+            .end(function(err, res){
+                expect(res.body.name).equal('Super Potato')
+                expect(res.body._id).equal(ID)
+                expect(res.body).to.have.property('name')
+    			expect(res).to.have.status(200);
+                done()
+            })
+	})
+	it('It should destroy items', function(done) {
+        chai.request(app)
+        .delete('/items/' + ID)
+        .end(function(err, res){
+            expect(res.body.name).equal('Super Potato')
+            expect(res.body._id).equal(ID)
+            expect(res.body).to.have.property('name')
+            expect(res).to.have.status(200);
+            done()
+        })
+	})
 	after(function(done) {
-		// Item.remove(function() {
-        //
-		// 	done()
-		// })
+		Item.remove(function() {
+			done()
+		})
 	})
 })
