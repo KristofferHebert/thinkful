@@ -40,13 +40,13 @@ Storage.prototype.add = function(name) {
 }
 
 Storage.prototype.removeById = function(id) {
-    var removedItem = "Item not found"
+    var removedItem
     var self = this
 
     self.items.find(function(item, i){
         if(item.id == id) {
             removedItem = item
-            delete self.items[i]
+            self.items.splice(i, 1)
             return removedItem
         }
     })
@@ -73,13 +73,13 @@ app.post('/items', function(req, res) {
 app.delete('/items/:id?', function(req, res) {
     var ID = req.params.id
 
-    if(!ID){
-        res.status(400).json({
+    var deletedItem = storage.removeById(ID)
+
+    if(deletedItem === undefined){
+        return res.status(400).json({
             "error": "Missing ID with request"
         })
     }
-
-    var deletedItem = storage.removeById(ID)
 
     res.json({
         item : deletedItem
