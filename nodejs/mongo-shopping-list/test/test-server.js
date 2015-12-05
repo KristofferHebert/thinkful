@@ -13,29 +13,46 @@ var should = chai.should()
 chai.use(chaiHttp)
 
 describe('Shopping List', function() {
-    before(function(done) {
-        app = server.app
-        seed.run(function() {
-            done()
-        })
-    })
-    it('It should get items', function(){
-        chaiHttp(app)
-        .get('/items')
-    })
-    it('It should create item', function(){
-        return false
-    })
-    it('It should update items', function(){
-        return false
-    })
-    it('It should destroy items', function(){
-        return false
-    })
-    after(function(done) {
-        Item.remove(function() {
+	before(function(done) {
+		seed.run(function() {
+			done()
+		})
+	})
+	it('It should get items', function() {
+        chai.request(app)
+            .get('/items')
+            .then(function(res){
+                    console.log('status', should(res.status).equal(500));
+                    should(err).equal(null);
+    				should(res.status).equal(500);
+            })
+            .catch(function (err) {
+                throw err;
+            })
+	})
+	it('It should create item', function() {
+        chai.request(app)
+            .post('/items')
+            .send({
+                name: "Potato"
+            })
+            .then(function(res){
+                    should(err).to.be.null;
+    				should(res).to.have.status(400);
+            })
+            .catch(function (err) {
+                throw err;
+            })
+	})
+	it('It should update items', function() {
+	})
+	it('It should destroy items', function() {
 
-                done()
-        })
-    })
+	})
+	after(function(done) {
+		Item.remove(function() {
+
+			done()
+		})
+	})
 })
