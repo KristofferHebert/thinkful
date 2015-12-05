@@ -8,6 +8,7 @@ var app = server.app
 var Item = require('../models/items')
 var seed = require('../db/seed')
 
+
 var should = chai.should()
 
 chai.use(chaiHttp)
@@ -20,9 +21,9 @@ describe('Shopping List', function() {
 	})
 	it('It should get items', function() {
         chai.request(app)
-            .get('/items')
+            .get('/itemsz')
             .then(function(res){
-                    console.log('status', should(res.status).equal(500));
+                    console.log(res.status);
                     should(err).equal(null);
     				should(res.status).equal(500);
             })
@@ -50,9 +51,9 @@ describe('Shopping List', function() {
 
 	})
 	after(function(done) {
-		Item.remove(function() {
-
-			done()
-		})
+		// Item.remove(function() {
+        //
+		// 	done()
+		// })
 	})
 })
