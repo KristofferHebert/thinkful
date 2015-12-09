@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
     }
 
     socket.on('disconnect', handleDisconnect);
-    socket.on('guess', handleGuess)
+    socket.on('newguess', handleGuess)
 
 })
 

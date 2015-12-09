@@ -3,7 +3,7 @@ function handleReady($){
     var $guessBox
     var socket = io()
 
-    function handleGuess(guess){
+    function handleNewGuess(guess){
         console.log(guess)
         $guess.append('div').text(guess)
     }
@@ -19,7 +19,7 @@ function handleReady($){
     $guess = $('#guess')
     $guessBox = $guess.find('input')
 
-    socket.on('guess', handleGuess)
+    socket.on('newguess', handleNewGuess)
     $guessBox.on('keydown', onKeyDown)
 }
 
