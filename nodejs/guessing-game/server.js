@@ -14,7 +14,7 @@ io.on('connection', function(socket) {
 
     function handleGuess(guess){
         console.log(guess)
-        socket.broadcast.emit('guess', guess)
+        socket.broadcast.emit('newguess', guess)
     }
 
     function handleDisconnect() {
@@ -22,8 +22,8 @@ io.on('connection', function(socket) {
     }
 
     socket.on('disconnect', handleDisconnect);
-    socket.on('newguess', handleGuess)
+    socket.on('guess', handleGuess)
 
 })
 
-server.listen(9000)
+server.listen(9001)
