@@ -4,7 +4,6 @@ function handleReady($){
     var socket = io()
 
     function handleNewGuess(guess){
-        console.log(guess)
         var newmessage = $('<li>').text(guess)
         $guess.find('#newguess')[0].appendChild(newmessage[0])
     }
