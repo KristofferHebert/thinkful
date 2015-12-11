@@ -1,11 +1,9 @@
 function handleReady($){
-    var $guess
-    var $guessBox
+    var $guess, $guessBox
     var socket = io()
 
     function handleNewGuess(guess){
-        var newmessage = $('<li>').text(guess)
-        $guess.find('#newguess')[0].appendChild(newmessage[0])
+        $guess.find('#newguess')[0].appendChild($('<li>').text(guess))
     }
 
     function onKeyDown(event) {
@@ -16,7 +14,7 @@ function handleReady($){
 
         handleNewGuess(guess)
         $guessBox.val('')
-    };
+    }
 
     $guess = $('#guess')
     $guessBox = $guess.find('input')
