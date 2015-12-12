@@ -3,11 +3,14 @@ function handleReady($){
     var socket = io()
 
     function handleNewGuess(guess){
-        $guess.find('#newguess')[0].appendChild($('<li>').text(guess))
+        var newguess = $('<li>')
+        newguess.text(guess)
+        $guess.find('#newguess')[0].appendChild(newguess[0])
     }
 
     function onKeyDown(event) {
         if (event.keyCode != 13) return
+        if ($guessBox.val() === '') return
 
         var guess = 'guess: ' + $guessBox.val()
         socket.emit('guess', guess)
