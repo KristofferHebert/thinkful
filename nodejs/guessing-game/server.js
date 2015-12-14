@@ -18,12 +18,18 @@ io.on('connection', function(socket) {
     }
 
     function handleDisconnect() {
-        console.log('A user has disconnected');
+        console.log('A user has disconnected')
     }
 
-    socket.on('disconnect', handleDisconnect);
+    function handleChoosenWord(value){
+        console.log(value)
+        socket.choosenword = value
+    }
+
+    socket.on('disconnect', handleDisconnect)
     socket.on('guess', handleGuess)
+    socket.on('choosenword', handleChoosenWord)
 
 })
-
+console.log('Starting on 9001')
 server.listen(9001)
